@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12\x63lexicon_v01.proto\x12\x0c\x63lexicon_v01\"[\n\nMorphology\x12\x0e\n\x06source\x18\x01 \x01(\t\x12\x16\n\x0emorph_features\x18\x02 \x03(\t\x12%\n\x07\x63litics\x18\x03 \x03(\x0b\x32\x14.clexicon_v01.Clitic\"0\n\x06\x43litic\x12\x0e\n\x06\x63litic\x18\x01 \x01(\t\x12\x16\n\x0emorph_features\x18\x02 \x03(\t\"P\n\rPronunciation\x12\x0e\n\x06source\x18\x01 \x01(\t\x12\r\n\x05phone\x18\x02 \x03(\t\x12\x10\n\x08syllable\x18\x03 \x03(\t\x12\x0e\n\x06stress\x18\x04 \x01(\t\"{\n\x08\x41nalysis\x12\r\n\x05lemma\x18\x01 \x01(\t\x12,\n\nmorphology\x18\x03 \x03(\x0b\x32\x18.clexicon_v01.Morphology\x12\x32\n\rpronunciation\x18\x04 \x03(\x0b\x32\x1b.clexicon_v01.Pronunciation\"\xca\x01\n\x08\x43Lexicon\x12\x36\n\x08\x61nalyses\x18\x01 \x03(\x0b\x32$.clexicon_v01.CLexicon.AnalysesEntry\x1a\x34\n\x08\x41nalyses\x12(\n\x08\x61nalysis\x18\x01 \x03(\x0b\x32\x16.clexicon_v01.Analysis\x1aP\n\rAnalysesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12.\n\x05value\x18\x02 \x01(\x0b\x32\x1f.clexicon_v01.CLexicon.Analyses:\x02\x38\x01\x62\x06proto3'
+  serialized_pb=b'\n\x12\x63lexicon_v01.proto\x12\x0c\x63lexicon_v01\"K\n\nMorphology\x12\x16\n\x0emorph_features\x18\x02 \x03(\t\x12%\n\x07\x63litics\x18\x03 \x03(\x0b\x32\x14.clexicon_v01.Clitic\"0\n\x06\x43litic\x12\x0e\n\x06\x63litic\x18\x01 \x01(\t\x12\x16\n\x0emorph_features\x18\x02 \x03(\t\"A\n\rPronunciation\x12\r\n\x05phone\x18\x02 \x03(\t\x12\x0f\n\x07segment\x18\x03 \x03(\t\x12\x10\n\x08syllable\x18\x04 \x03(\t\"\x8b\x01\n\x08\x41nalysis\x12\r\n\x05lemma\x18\x01 \x01(\t\x12\x0e\n\x06source\x18\x02 \x01(\t\x12,\n\nmorphology\x18\x03 \x03(\x0b\x32\x18.clexicon_v01.Morphology\x12\x32\n\rpronunciation\x18\x04 \x03(\x0b\x32\x1b.clexicon_v01.Pronunciation\"\xca\x01\n\x08\x43Lexicon\x12\x36\n\x08\x61nalyses\x18\x01 \x03(\x0b\x32$.clexicon_v01.CLexicon.AnalysesEntry\x1a\x34\n\x08\x41nalyses\x12(\n\x08\x61nalysis\x18\x01 \x03(\x0b\x32\x16.clexicon_v01.Analysis\x1aP\n\rAnalysesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12.\n\x05value\x18\x02 \x01(\x0b\x32\x1f.clexicon_v01.CLexicon.Analyses:\x02\x38\x01\x62\x06proto3'
 )
 
 
@@ -34,21 +34,14 @@ _MORPHOLOGY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='source', full_name='clexicon_v01.Morphology.source', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='morph_features', full_name='clexicon_v01.Morphology.morph_features', index=1,
+      name='morph_features', full_name='clexicon_v01.Morphology.morph_features', index=0,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='clitics', full_name='clexicon_v01.Morphology.clitics', index=2,
+      name='clitics', full_name='clexicon_v01.Morphology.clitics', index=1,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -67,7 +60,7 @@ _MORPHOLOGY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=36,
-  serialized_end=127,
+  serialized_end=111,
 )
 
 
@@ -105,8 +98,8 @@ _CLITIC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=129,
-  serialized_end=177,
+  serialized_start=113,
+  serialized_end=161,
 )
 
 
@@ -119,30 +112,23 @@ _PRONUNCIATION = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='source', full_name='clexicon_v01.Pronunciation.source', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='phone', full_name='clexicon_v01.Pronunciation.phone', index=1,
+      name='phone', full_name='clexicon_v01.Pronunciation.phone', index=0,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='syllable', full_name='clexicon_v01.Pronunciation.syllable', index=2,
+      name='segment', full_name='clexicon_v01.Pronunciation.segment', index=1,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='stress', full_name='clexicon_v01.Pronunciation.stress', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='syllable', full_name='clexicon_v01.Pronunciation.syllable', index=2,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -158,8 +144,8 @@ _PRONUNCIATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=179,
-  serialized_end=259,
+  serialized_start=163,
+  serialized_end=228,
 )
 
 
@@ -179,14 +165,21 @@ _ANALYSIS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='morphology', full_name='clexicon_v01.Analysis.morphology', index=1,
+      name='source', full_name='clexicon_v01.Analysis.source', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='morphology', full_name='clexicon_v01.Analysis.morphology', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='pronunciation', full_name='clexicon_v01.Analysis.pronunciation', index=2,
+      name='pronunciation', full_name='clexicon_v01.Analysis.pronunciation', index=3,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -204,8 +197,8 @@ _ANALYSIS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=261,
-  serialized_end=384,
+  serialized_start=231,
+  serialized_end=370,
 )
 
 
@@ -236,8 +229,8 @@ _CLEXICON_ANALYSES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=455,
-  serialized_end=507,
+  serialized_start=441,
+  serialized_end=493,
 )
 
 _CLEXICON_ANALYSESENTRY = _descriptor.Descriptor(
@@ -274,8 +267,8 @@ _CLEXICON_ANALYSESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=509,
-  serialized_end=589,
+  serialized_start=495,
+  serialized_end=575,
 )
 
 _CLEXICON = _descriptor.Descriptor(
@@ -305,8 +298,8 @@ _CLEXICON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=387,
-  serialized_end=589,
+  serialized_start=373,
+  serialized_end=575,
 )
 
 _MORPHOLOGY.fields_by_name['clitics'].message_type = _CLITIC

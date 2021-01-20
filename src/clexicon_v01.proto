@@ -7,9 +7,8 @@ syntax = "proto3";
 package clexicon_v01;
 
 message Morphology {
-  string source = 1;
-  repeated string morph_features = 2;
-  repeated Clitic clitics = 3; // if a wordform contains a clitic
+  repeated string morph_features = 1;
+  repeated Clitic clitics = 2; // if a wordform contains a clitic
 }
 
 message Clitic {
@@ -18,15 +17,14 @@ message Clitic {
 }
 
 message Pronunciation {
-  string source = 1;
-  repeated string phone = 2; // in IPA
+  repeated string phone = 1; // in IPA
+  repeated string segment = 2; // not in IPA (ortho with the stress(es) marked)
   repeated string syllable = 3;
-  string stress = 4; // ortho with the stress marked
-
 }
 
 message Analysis {
-  string lemma = 1; // assigned if the string key is a wordform
+  string source = 1;
+  string lemma = 2; // assigned if the string key is a wordform
   repeated Morphology morphology = 3;
   repeated Pronunciation pronunciation = 4;
 }

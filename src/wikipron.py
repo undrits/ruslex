@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 import utils
 import clexicon_v01_pb2
 
@@ -37,8 +37,7 @@ def compile_wikipron(path: str,
 
             # add entry to the lexicon
             wordform_lexicon = utils._build_entry(wordform_lexicon, key='wordform',
-                                                  add_wordform=wordform, pron_source='wikipron',
+                                                  add_wordform=wordform, source='wikipron',
                                                   add_phones=phones)
 
     return wordform_lexicon
-

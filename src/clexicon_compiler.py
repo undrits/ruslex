@@ -1,11 +1,13 @@
 #! usr/bin/env python
 
+""" Build a CLexicon out of the provided data sources (Zaliznyak-Giella, WikiPron, UniMorph) """
+
 import argparse
 from google.protobuf import text_format
-from src import clexicon_v01_pb2
-from src.wikipron import compile_wikipron
-from src.zaliznyak import compile_zaliznyak_giella
-from src.unimorph import compile_unimorph
+import clexicon_v01_pb2
+from wikipron import compile_wikipron
+from zaliznyak import compile_zaliznyak_giella
+from unimorph import compile_unimorph
 import time
 
 

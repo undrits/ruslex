@@ -25,9 +25,6 @@ def compile_zaliznyak_giella(path: str,
                              lemma_lexicon: Optional[object] = None) -> Tuple[object, object]:
     '''
     Build a wordform and a lemma lexicon databases out of Zaliznyak-Giella data.
-
-    :param path: path to the file with Zaliznyak-Giella data
-    :return: a tuple of 2 lexicon objects: wordform lexicon and lemma lexicon
     '''
 
     source = open(path, 'r', encoding='utf8')
@@ -49,7 +46,7 @@ def compile_zaliznyak_giella(path: str,
         if line.startswith('шести'):
             continue
 
-        lemma_features, stressed_wordform = line.split('\t')
+        lemma_features, wordform = line.split('\t')
 
         # if a word contains a clitic, both lemmas and their features are provided
         # though separated by # : clitic_lemma+FEAT#lemma+FEAT+etc.
@@ -62,23 +59,35 @@ def compile_zaliznyak_giella(path: str,
             clitic = None
             clitic_features = None
 
-        # use unstressed wordform as key for the lexicon
-        if "ё" in stressed_wordform:
-            unstressed = stressed_wordform
-        else:
-            stress = '́'
-            index = stressed_wordform.find(stress)
-            if index != -1:
-                unstressed = stressed_wordform[:index] + stressed_wordform[index + 1:]
+        # use unstressed wordform as key for the lexicon, save stressed ortho as pronunciation
+        primary_stress = '́'
+        secondary_stress = '̀'
+        pron_segments = []
+        unstressed = ''
+        i = 0
+        while i < len(wordform):
+            if i == (len(wordform) - 1):
+                pron_segments.append(wordform[i])
+                unstressed += wordform[i]
+                break
+            if wordform[i + 1] == primary_stress or wordform[i + 1] == secondary_stress:
+                pron_segments.append(wordform[i:i + 2])
+                unstressed += wordform[i]
+                i += 2
+            elif wordform[i] == ' ':
+                unstressed += wordform[i]
+                i += 1
             else:
-                unstressed = stressed_wordform
+                pron_segments.append(wordform[i])
+                unstressed += wordform[i]
+                i += 1
 
         # add the unstressed wordform + its features to the wordform lexicon
         wordform_lexicon = utils._build_entry(wordform_lexicon, key='wordform', add_wordform=unstressed,
-                                              add_lemma=lemma, morph_source='zaliznyak-giella',
+                                              add_lemma=lemma, source='zaliznyak-giella',
                                               morph_features=features,
                                               add_clitic=clitic, add_clitic_features=clitic_features,
-                                              stressed_source='zaliznyak-giella', add_stressed=stressed_wordform)
+                                              add_segments=pron_segments)
 
         # add the lemma and its features to a separate lemma lexicon
         is_lemma = 0
@@ -99,10 +108,9 @@ def compile_zaliznyak_giella(path: str,
                 is_lemma = 1
         if is_lemma:
             lemma_lexicon = utils._build_entry(lemma_lexicon, key='lemma', add_lemma=lemma,
-                                               morph_source='zaliznyak-giella',
+                                               source='zaliznyak-giella',
                                                morph_features=features, add_clitic=clitic,
                                                add_clitic_features=clitic_features,
-                                               add_stressed=stressed_wordform,
-                                               stressed_source='zaliznyak-giella')
+                                               add_segments=pron_segments)
     source.close()
     return wordform_lexicon, lemma_lexicon

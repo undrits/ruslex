@@ -6,6 +6,9 @@ import clexicon_v01_pb2
 def compile_unimorph(path: str,
                      wordform_lexicon: Optional[object] = None,
                      lemma_lexicon: Optional[object] = None) -> Tuple[object, object]:
+    '''
+    Build a lemma and a wordform lexicons
+    '''
 
     if not wordform_lexicon:
         wordform_lexicon = clexicon_v01_pb2.CLexicon()
@@ -26,7 +29,7 @@ def compile_unimorph(path: str,
 
             wordform_lexicon = utils._build_entry(wordform_lexicon, key='wordform',
                                                   add_wordform=wordform, add_lemma=lemma,
-                                                  morph_source='unimorph',  morph_features=features)
+                                                  source='unimorph',  morph_features=features)
 
             is_lemma = 0
             if lemma == wordform:
@@ -43,8 +46,6 @@ def compile_unimorph(path: str,
                     is_lemma = 1
             if is_lemma:
                 lemma_lexicon = utils._build_entry(lemma_lexicon, key='lemma', add_lemma=lemma,
-                                                   morph_source='unimorph', morph_features=features)
+                                                   source='unimorph', morph_features=features)
 
     return wordform_lexicon, lemma_lexicon
-
-
