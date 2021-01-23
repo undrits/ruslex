@@ -1,15 +1,15 @@
 from typing import Optional
 import utils
-import clexicon_v01_pb2
+import clexicon_pb2
 
 
 def compile_wikipron(path: str,
                      wordform_lexicon: Optional[object] = None) -> object:
 
-    """ can only be built on wordforms """
+    """ Build a wordform lexicon with pronunciation features """
 
     if not wordform_lexicon:
-        wordform_lexicon = clexicon_v01_pb2.CLexicon()
+        wordform_lexicon = clexicon_pb2.CLexicon()
 
     with open(path, 'r') as source:
         while True:

@@ -1,0 +1,42 @@
+// PB definition for CLexicons.
+// We avoid inner classes except where they're syntactically required, to
+// make it easier to use type stubs.
+
+syntax = "proto3";
+
+package clexicon;
+
+message Morphology {
+  repeated string morph_features = 1;
+  repeated Clitic clitics = 2; // if a wordform contains a clitic
+}
+
+message Clitic {
+  string clitic = 1;
+  repeated string morph_features = 2;
+}
+
+message Pronunciation {
+  repeated string phone = 1; // in IPA
+  repeated string segment = 2; // not in IPA (ortho with the stress(es) marked)
+  repeated string syllable = 3;
+}
+
+message Analysis {
+  string source = 1;
+  string lemma = 2; // assigned if the string key is a wordform
+  repeated Morphology morphology = 3;
+  repeated Pronunciation pronunciation = 4;
+}
+
+message CLexicon {
+  message Analyses {
+    repeated Analysis analysis = 1;
+  }
+
+  // If string keys are lemmas, this is a "lemma lexicon".
+  // If string keys are wordforms, this is "wordform lexicon".
+  // Cf. [den].l vs. [den].w files in CELEX.
+  // String keys are unstressed.
+  map<string, Analyses> analyses = 1;
+}

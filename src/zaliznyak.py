@@ -1,6 +1,6 @@
 from typing import List, Tuple, Optional
 import utils
-import clexicon_v01_pb2
+import clexicon_pb2
 
 
 def _lemma_features_split(string: str, sep: str) -> Tuple[str, List[str]]:
@@ -29,9 +29,9 @@ def compile_zaliznyak_giella(path: str,
 
     source = open(path, 'r', encoding='utf8')
     if not wordform_lexicon:
-        wordform_lexicon = clexicon_v01_pb2.CLexicon()
+        wordform_lexicon = clexicon_pb2.CLexicon()
     if not lemma_lexicon:
-        lemma_lexicon = clexicon_v01_pb2.CLexicon()
+        lemma_lexicon = clexicon_pb2.CLexicon()
 
     while True:
         line = source.readline().strip()

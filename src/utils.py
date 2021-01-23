@@ -14,6 +14,7 @@ def _build_entry(lexicon: object,
                  add_syllables: Optional[List[str]] = None,
                  ) -> object:
     ''' Internal function for building the protobuf lexicon entry '''
+
     # wordform lexicon
     if key == 'wordform':
         entry = lexicon.analyses[add_wordform].analysis.add()

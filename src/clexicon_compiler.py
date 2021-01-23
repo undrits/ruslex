@@ -1,21 +1,22 @@
 #! usr/bin/env python
 
-""" Build a CLexicon out of the provided data sources (Zaliznyak-Giella, WikiPron, UniMorph) """
+""" Build a CLexicon out of the provided data sources (Zaliznyak-Giella, WikiPron, UniMorph, Apertium) """
 
 import argparse
 from google.protobuf import text_format
-import clexicon_v01_pb2
+import clexicon_pb2
 from wikipron import compile_wikipron
 from zaliznyak import compile_zaliznyak_giella
 from unimorph import compile_unimorph
+from apertium import compile_apertium
 import time
 
 
-def main(args: argparse.Namespace):
+def main(args: argparse.Namespace) -> None:
 
     # create wordform and lemma lexicons
-    w_lexicon = clexicon_v01_pb2.CLexicon()
-    l_lexicon = clexicon_v01_pb2.CLexicon()
+    w_lexicon = clexicon_pb2.CLexicon()
+    l_lexicon = clexicon_pb2.CLexicon()
 
     # add data from provided sources
     if args.zaliznyak_giella:
@@ -25,33 +26,39 @@ def main(args: argparse.Namespace):
         w_lexicon = compile_wikipron(args.wikipron, w_lexicon)
     if args.unimorph:
         w_lexicon, l_lexicon = compile_unimorph(args.unimorph, w_lexicon, l_lexicon)
+    if args.apertium:
+        w_lexicon, l_lexicon = compile_apertium(args.apertium, w_lexicon, l_lexicon)
 
-    #save to disk
+    # save to disk
     if args.lemma_lexicon:
         l_output = open(args.lemma_lexicon, 'wb')
     else:
-        l_output = open('data/lexicon.l', 'wb')
+        l_output = open('lemma_lexicon.pb', 'wb')
     l_output.write(l_lexicon.SerializeToString())
     l_output.close()
 
     if args.wordform_lexicon:
         w_output = open(args.wordform_lexicon, 'wb')
     else:
-        w_output = open('data/lexicon.w', 'wb')
+        w_output = open('wordform_lexicon.pb', 'wb')
     w_output.write(w_lexicon.SerializeToString())
     w_output.close()
 
     # save in a human readable format
     if args.lemma_lexicon_h:
         l_output_h = open(args.lemma_lexicon_h, 'w')
-        l_output_h.write(text_format.MessageToString(l_lexicon, as_utf8=True))
-        l_output_h.close()
+    else:
+        l_output_h = open('lemma_lexicon.textproto', 'w')
+    l_output_h.write(text_format.MessageToString(l_lexicon, as_utf8=True))
+    l_output_h.close()
 
     if args.wordform_lexicon_h:
         w_output_h = open(args.wordform_lexicon_h, 'w')
-        w_output_h.write(text_format.MessageToString(w_lexicon, as_utf8=True))
-        w_output_h.close()
-
+    else:
+        w_output_h = open('wordform_lexicon.textproto', 'w')
+    w_output_h.write(text_format.MessageToString(w_lexicon, as_utf8=True))
+    w_output_h.close()
+    print('Done!')
 
 
 if __name__ == '__main__':
@@ -98,6 +105,5 @@ if __name__ == '__main__':
     )
 
     main(parser.parse_args())
-    print('Done!')
     print('Time:', time.process_time())
 

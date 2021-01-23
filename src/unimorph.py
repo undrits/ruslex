@@ -1,6 +1,6 @@
 import utils
 from typing import Optional, Tuple
-import clexicon_v01_pb2
+import clexicon_pb2
 
 
 def compile_unimorph(path: str,
@@ -11,9 +11,9 @@ def compile_unimorph(path: str,
     '''
 
     if not wordform_lexicon:
-        wordform_lexicon = clexicon_v01_pb2.CLexicon()
+        wordform_lexicon = clexicon_pb2.CLexicon()
     if not lemma_lexicon:
-        lemma_lexicon = clexicon_v01_pb2.CLexicon()
+        lemma_lexicon = clexicon_pb2.CLexicon()
 
     with open(path, 'r') as source:
 
