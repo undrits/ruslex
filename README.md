@@ -1,4 +1,4 @@
-# rus_data
+# russian lexicon
 
 Russian lexicon data from 4 sources. The data include morphological and pronunciation analyses.
 
@@ -10,21 +10,60 @@ The sources are:
   - https://github.com/kylebgorman/wikipron
 - UniMoprh
   - https://github.com/unimorph/rus
-- Apertium
+- Apertium (the lexicon excludes multi-word entries)
     - https://github.com/apertium/apertium-rus
 
+## installation
 
-## data & format
+To install, clone the repo and run:
 
-The data are compiled into 2 lexicons:
+```shell
+pip install -e .
+```
+
+After that, the data can be imported as follows:
+```python
+from russian_lexicon import clexicon
+
+wordform_lexicon = clexicon.wordform_lexicon()
+lemma_lexicon = clexicon.lemma_lexicon()
+```
+
+## format
+
+The PB structure of the data is described in the ```clexicon.proto``` file.
+The data can be looped through as e.g.:
+```python
+from google.protobuf import text_format
+
+for key in lexicon.analyses:
+    # key is the wordform or lemma
+    # to loop through analyses associated with each key
+    for analysis in lexicon.analyses[key].analysis:
+        # to see source
+        print(text_format.MessageToString(analysis.source, as_utf8=True))
+        # to print the morphology data
+        print(text_format.MessageToString(analysis.morphology, as_utf8=True))
+        # to access the pronunciation data
+        for prons in analysis.pronunciation:
+            print(text_format.MessageToString(prons, as_utf8=True))
+```
+
+
+## data
+
+If interested, the compiled data are also provided in the ``` data``` folder, as 2 lexicons:
 - the lemma lexicon, where the keys are lemmas, and the values are the corresponding morphological and pronunctiation data 
 - the wordform lexicon, where the keys are wordforms, and the values are their lemmas (where available), the correposnding morphological  and pronunciation data
 
-The data is provided in 2 formats:
-- .pb is a binary file that can be read by protobuf
-- .textproto contains the data in a human readable format
+The ```.textproto``` file contains the data in a human readable format
+
+## license
+
+The codebase is distributed under the GNU General Public License v3 (GPLv3). Please see ```License.txt``` for details.
 
 The data sources used bear their original licenses.
+
 
 
 
