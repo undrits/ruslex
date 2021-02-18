@@ -37,16 +37,28 @@ The data can be looped through as e.g.:
 from google.protobuf import text_format
 
 for key in lexicon.analyses:
-    # key is the wordform or lemma
-    # to loop through analyses associated with each key
-    for analysis in lexicon.analyses[key].analysis:
-        # to see source
-        print(text_format.MessageToString(analysis.source, as_utf8=True))
-        # to print the morphology data
-        print(text_format.MessageToString(analysis.morphology, as_utf8=True))
-        # to access the pronunciation data
-        for prons in analysis.pronunciation:
-            print(text_format.MessageToString(prons, as_utf8=True))
+	if key == "Августович":
+		print("Data format:")
+		print(text_format.MessageToString(lexicon.analyses[key], as_utf8=True))
+		for analysis in lexicon.analyses[key].analysis:
+			print("Data source:", analysis.source)
+			print()
+			print("All morphological features:", analysis.morphology.morph_features)
+			print("Individual morphological features:")
+			for feature in analysis.morphology.morph_features:
+				print(feature)
+			print()
+			for pron in analysis.pronunciation:
+				print("Pronunciation (phonetic):", pron.phone)
+				print("Phones:")
+				for phone in pron.phone:
+					print(phone)
+				print()
+				print("Pronunciation (orthographic with stress):", pron.segment)
+				print("Segments (with stress):")
+				for segment in pron.segment:
+					print(segment)
+				print()
 ```
 
 
