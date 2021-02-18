@@ -23,7 +23,7 @@ pip install -e .
 
 After that, the data can be imported as follows:
 ```python
-from russian_lexicon import clexicon
+from ruslex import clexicon
 
 wordform_lexicon = clexicon.wordform_lexicon()
 lemma_lexicon = clexicon.lemma_lexicon()
