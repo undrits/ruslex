@@ -5,10 +5,12 @@
 import argparse
 from google.protobuf import text_format
 import clexicon_pb2
-from utils import _compile_apertium, \
-    _compile_unimorph, \
-    _compile_wikipron, \
-    _compile_zaliznyak_giella
+from utils import (
+    _compile_apertium,
+    _compile_unimorph,
+    _compile_wikipron,
+    _compile_zaliznyak_giella,
+)
 import time
 
 
@@ -28,8 +30,9 @@ def main(args: argparse.Namespace) -> None:
 
     # add data from provided sources
     if args.zaliznyak_giella:
-        w_lexicon, l_lexicon = _compile_zaliznyak_giella(args.zaliznyak_giella,
-                                                        w_lexicon, l_lexicon)
+        w_lexicon, l_lexicon = _compile_zaliznyak_giella(
+            args.zaliznyak_giella, w_lexicon, l_lexicon
+        )
     if args.wikipron:
         w_lexicon = _compile_wikipron(args.wikipron, w_lexicon)
     if args.unimorph:
@@ -39,37 +42,37 @@ def main(args: argparse.Namespace) -> None:
 
     # save to disk
     if args.lemma_lexicon:
-        l_output = open(args.lemma_lexicon, 'wb')
+        l_output = open(args.lemma_lexicon, "wb")
     else:
-        l_output = open('lemma_lexicon.pb', 'wb')
+        l_output = open("lemma_lexicon.pb", "wb")
     l_output.write(l_lexicon.SerializeToString())
     l_output.close()
 
     if args.wordform_lexicon:
-        w_output = open(args.wordform_lexicon, 'wb')
+        w_output = open(args.wordform_lexicon, "wb")
     else:
-        w_output = open('wordform_lexicon.pb', 'wb')
+        w_output = open("wordform_lexicon.pb", "wb")
     w_output.write(w_lexicon.SerializeToString())
     w_output.close()
 
     # save in a human readable format
     if args.lemma_lexicon_h:
-        l_output_h = open(args.lemma_lexicon_h, 'w')
+        l_output_h = open(args.lemma_lexicon_h, "w")
     else:
-        l_output_h = open('lemma_lexicon.textproto', 'w')
+        l_output_h = open("lemma_lexicon.textproto", "w")
     l_output_h.write(text_format.MessageToString(l_lexicon, as_utf8=True))
     l_output_h.close()
 
     if args.wordform_lexicon_h:
-        w_output_h = open(args.wordform_lexicon_h, 'w')
+        w_output_h = open(args.wordform_lexicon_h, "w")
     else:
-        w_output_h = open('wordform_lexicon.textproto', 'w')
+        w_output_h = open("wordform_lexicon.textproto", "w")
     w_output_h.write(text_format.MessageToString(w_lexicon, as_utf8=True))
     w_output_h.close()
-    print('Done!')
+    print("Done!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--zaliznyak_giella",
@@ -113,5 +116,4 @@ if __name__ == '__main__':
     )
 
     main(parser.parse_args())
-    print('Time:', time.process_time())
-
+    print("Time:", time.process_time())
