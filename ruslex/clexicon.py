@@ -1,8 +1,11 @@
 from ruslex import clexicon_pb2
 import gzip
+import os
+from pathlib import Path
 
-LEMMA_PATH = "data/lemma_lexicon.pb.gz"
-WORDFORM_PATH = "data/wordform_lexicon.pb.gz"
+DIR = Path(__file__).resolve().parent
+LEMMA_PATH = os.path.join(DIR, 'data', 'lemma_lexicon.pb.gz')
+WORDFORM_PATH = os.path.join(DIR, 'data', 'wordform_lexicon.pb.gz')
 
 
 def lemma_lexicon(path: str = LEMMA_PATH):
