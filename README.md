@@ -2,7 +2,7 @@
 
 RusLex is a databse of Russian lexicon that combines data from 4 sources. The data include morphological and pronunciation analyses.
 
-## NEW! Data on novel Russian loanwords is coming soon!
+### NEW! Data on novel Russian loanwords is coming soon!
 
 The sources are:
 
